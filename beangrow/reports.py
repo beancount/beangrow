@@ -20,9 +20,13 @@ import typing
 
 from dateutil.relativedelta import relativedelta
 import numpy as np
-import pandas
+
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import pandas
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+
 import seaborn
 seaborn.set()
 
