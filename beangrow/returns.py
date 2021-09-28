@@ -60,7 +60,9 @@ class Pricer:
 
 def net_present_value(irr: float, cash_flows: Array, years: Array) -> float:
     """Net present value; objective function for optimizer."""
-    return np.sum(cash_flows / (1. + irr) ** years)
+    # Note: We handle negative roots as per https://github.com/beancount/beangrow/issues/4.
+    r = 1. + irr
+    return np.sum(cash_flows / (np.sign(r) * (np.abs(r) ** years)))
 
 
 def compute_irr(dated_flows: List[CashFlow],
@@ -83,7 +85,7 @@ def compute_irr(dated_flows: List[CashFlow],
     years = np.array(years)
 
     # Start with something reasonably normal.
-    estimated_irr = 0.20
+    estimated_irr = 0.2 * np.sign(np.sum(cash_flows))
 
     # Solve for the root of the NPV equation.
     irr, unused_infodict, unused_ier, unused_mesg = fsolve(
