@@ -14,6 +14,7 @@ import io
 import logging
 import multiprocessing
 import os
+import platform
 import subprocess
 import tempfile
 import typing
@@ -456,7 +457,8 @@ def generate_reports(account_data_map: Dict[Account, AccountData],
 
     # Write out a returns file for every account.
     os.makedirs(output_dir, exist_ok=True)
-    multiprocessing.set_start_method('fork')
+    multiprocessing.set_start_method(
+        'spawn' if platform.system() == 'Windows' else 'fork')
     calls = []
     for report in config.groups.group:
 
