@@ -355,7 +355,8 @@ def plot_flows(output_dir: str,
     axs[1].set_title("log(Cash Flows)")
     fig.autofmt_xdate()
     fig.tight_layout()
-    filename = outplots["flows"] = path.join(output_dir, "flows.svg")
+    filename = path.join(output_dir, "flows.svg")
+    outplots["flows"] = "flows.svg"
     plt.savefig(filename)
     plt.close(fig)
 
@@ -393,7 +394,8 @@ def plot_flows(output_dir: str,
     ax.legend(["Amortized value from flows", "Market value"], fontsize="xx-small")
     fig.autofmt_xdate()
     fig.tight_layout()
-    filename = outplots["cumvalue"] = path.join(output_dir, "cumvalue.svg")
+    filename = path.join(output_dir, "cumvalue.svg")
+    outplots["cumvalue"] = "cumvalue.svg"
     plt.savefig(filename)
     plt.close(fig)
 
