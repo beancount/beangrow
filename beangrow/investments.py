@@ -35,9 +35,9 @@ from beancount.core.amount import Amount
 from beancount.core.inventory import Inventory
 from beancount.parser import printer
 
-from config_pb2 import Config
-from config_pb2 import Investment
-from config_pb2 import InvestmentConfig
+from beangrow.config_pb2 import Config
+from beangrow.config_pb2 import Investment
+from beangrow.config_pb2 import InvestmentConfig
 
 
 # Basic type aliases.
@@ -484,7 +484,6 @@ def write_account_file(dcontext: display_context.DisplayContext,
 
 def cash_flows_to_table(cash_flows: List[CashFlow]) -> pandas.DataFrame:
     """Flatten a list of cash flows to an HTML table string."""
-    import reports
     header = ["date", "amount", "currency", "is_dividend", "source", "investment"]
     rows = []
     for flow in cash_flows:

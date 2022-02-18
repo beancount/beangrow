@@ -20,10 +20,10 @@ from beancount.core import prices
 from beancount.core.number import ZERO
 from beancount.core.inventory import Inventory
 
-from investments import AccountData
-from investments import CashFlow
-from investments import Cat
-from investments import compute_balance_at
+from beangrow.investments import AccountData
+from beangrow.investments import CashFlow
+from beangrow.investments import Cat
+from beangrow.investments import compute_balance_at
 
 
 # Basic type aliases.
