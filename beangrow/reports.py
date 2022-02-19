@@ -28,20 +28,17 @@ import pandas
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-import seaborn
-seaborn.set()
-
 from beancount.core import data
 from beancount.core import prices
 from beancount.core.amount import Amount
 from beancount.parser import printer
 
-from config_pb2 import Config, Group
-from investments import AccountData
-from investments import CashFlow
-import investments
-import returns as returnslib
-from returns import Pricer
+from beangrow.config_pb2 import Config, Group
+from beangrow.investments import AccountData
+from beangrow.investments import CashFlow
+from beangrow import investments
+from beangrow import returns as returnslib
+from beangrow.returns import Pricer
 
 
 # Basic type aliases.

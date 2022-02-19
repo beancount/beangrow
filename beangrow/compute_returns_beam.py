@@ -21,11 +21,11 @@ from beancount import loader
 from beancount.core import getters
 from beancount.core import prices
 
-import investments
-import reports
-import config as configlib
-import config_pb2
-import returns as returnslib
+from beangrow import investments
+from beangrow import reports
+from beangrow import config as configlib
+from beangrow import config_pb2
+from beangrow import returns as returnslib
 
 
 Date = datetime.date

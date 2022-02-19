@@ -20,9 +20,9 @@ from beancount.core import data
 from beancount.core import getters
 from beancount.parser import options
 
-from config_pb2 import Config
-from config_pb2 import InvestmentConfig
-from config_pb2 import GroupConfig
+from beangrow.config_pb2 import Config
+from beangrow.config_pb2 import InvestmentConfig
+from beangrow.config_pb2 import GroupConfig
 
 
 # Basic type aliases.
