@@ -71,7 +71,7 @@ def compute_irr(dated_flows: List[CashFlow],
                 end_date: Date) -> float:
     """Compute the irregularly spaced IRR."""
 
-    # Array of cash flows, converted to USD.
+    # Array of cash flows, converted to target currency.
     usd_flows = []
     for flow in dated_flows:
         usd_amount = pricer.convert_amount(flow.amount, target_currency, date=flow.date)
@@ -192,6 +192,7 @@ def truncate_and_merge_cash_flows(
 
 
 def compute_portfolio_values(price_map: prices.PriceMap,
+                             target_currency: Currency,
                              transactions: data.Entries) -> Tuple[List[Date], List[float]]:
     """Compute a serie of portfolio values over time."""
 
@@ -226,7 +227,7 @@ def compute_portfolio_values(price_map: prices.PriceMap,
 
         # Convert to market value.
         value_balance = balance.reduce(convert.get_value, price_map, date)
-        cost_balance = value_balance.reduce(convert.convert_position, "USD", price_map)
+        cost_balance = value_balance.reduce(convert.convert_position, target_currency, price_map)
         pos = cost_balance.get_only_position()
         value = pos.units.number if pos else ZERO
 

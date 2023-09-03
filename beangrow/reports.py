@@ -193,7 +193,7 @@ def write_returns_html(dirname: str,
         transactions = data.sorted([txn for ad in account_data for txn in ad.transactions])
 
         # Note: This is where the vast majority of the time is spent.
-        plots = plot_flows(dirname, pricer.price_map,
+        plots = plot_flows(dirname, pricer.price_map, target_currency,
                            cash_flows, transactions, returns.total)
         fprint('<img src={} style="width: 100%"/>'.format(plots["flows"]))
         fprint('<img src={} style="width: 100%"/>'.format(plots["cumvalue"]))
@@ -325,6 +325,7 @@ def plot_prices(output_dir: str,
 
 def plot_flows(output_dir: str,
                price_map: prices.PriceMap,
+               target_currency: Currency,
                flows: List[CashFlow],
                transactions: data.Entries,
                returns_rate: float) -> Dict[str, str]:
@@ -384,7 +385,7 @@ def plot_flows(output_dir: str,
         ax.plot(dates_all, gamounts, color='#000', alpha=0.7, linewidth=lw)
 
     # Overlay value of assets over time.
-    value_dates, value_values = returnslib.compute_portfolio_values(price_map, transactions)
+    value_dates, value_values = returnslib.compute_portfolio_values(price_map, target_currency, transactions)
     ax.plot(value_dates, value_values, color='#00F', alpha=0.5, linewidth=lw)
     ax.scatter(value_dates, value_values, color='#00F', alpha=lw, s=2)
 
