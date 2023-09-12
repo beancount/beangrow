@@ -422,9 +422,9 @@ def get_calendar_intervals(date: Date) -> List[Interval]:
     """Return a list of date pairs for sequential intervals."""
     intervals = [
         (str(year), Date(year, 1, 1), Date(year + 1, 1, 1))
-        for year in range(TODAY.year - 15, TODAY.year)]
+        for year in range(date.year - 15, date.year)]
     intervals.append(
-        (str(TODAY.year), Date(TODAY.year, 1, 1), date))
+        (str(date.year), Date(date.year, 1, 1), date))
     return intervals
 
 
