@@ -1,6 +1,130 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "beangrow"
+version = "0.1.0"
+description = "A StreamLit app for Beancount metrics"
+authors = [
+    "Martin Blais <blais@furius.ca>",
 ]
-build-backend = "setuptools.build_meta"
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache Software License",
+    "Typing :: Typed",
+]
+packages = [
+    { include = "beangrow", from = "." },
+]
+
+[tool.poetry.scripts]
+beangrow-returns = "beangrow.compute_returns:main"
+beangrow-prices = "beangrow.download_prices:main"
+beangrow-prices-file = "beangrow.download_prices_from_file:main"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.12"
+numpy = "^1.26.4"
+pandas = "^2.2.2"
+matplotlib = "^3.9.0"
+beancount = "^2.3.6"
+scipy = "^1.13.1"
+beanprice = {git = "git@github.com:beancount/beanprice.git"}
+pandas-stubs = "^2.2.2.240514"
+matplotlib-stubs = "^0.2.0"
+
+[tool.black]
+line-length = 88
+
+[tool.pyright]
+exclude = [
+    ".venv",
+    ".direnv",
+]
+typeCheckingMode = "standard"
+useLibraryCodeForTypes = true
+reportMissingTypeStubs = false
+
+[tool.ruff]
+select = [ "ALL" ]
+ignore = [
+    # Pyright automatically infers the type of `self`
+    "ANN101",
+
+    # Pyright automatically infers the type of `cls`
+    "ANN102",
+
+    # In some cases actively detrimental; somewhat conflicts with black
+    "COM",
+
+    # In combination with D213, this results in noisy diffs and inconsistencies
+    # See also <https://github.com/charliermarsh/ruff/issues/4174>.
+    "D200",
+
+    # This results inconsistencies between function and class docstrings
+    # See also <https://github.com/charliermarsh/ruff/issues/4175>.
+    "D202",
+
+    # D211 is preferred since the extra blank line isn't visually useful
+    "D203",
+
+    # D213 is preferred since it's more readable and allows more characters
+    "D212",
+
+    # Covered by D401, which is more restrictive
+    "D415",
+
+    # Too many false-positives
+    "ERA",
+
+    # Just use a recent version of Python
+    "FA",
+
+    # This would just discourage documenting deficiences, not committing them
+    "FIX",
+
+    # Type-checkers interpret redundant `as` as exporting an item
+    "PLC0414",
+
+    # False-positives with chained function calls
+    "RSE102",
+
+    # Not applicable
+    "T20",
+
+    # Causes churn and awful looking import blocks for little gain
+    "TCH",
+
+    # Just look at the file history
+    "TD002",
+
+    # Not everything is worth a link
+    "TD003",
+]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = [
+    "D100",
+    "D103",
+    "D104",
+    "S101",
+]
+
+[tool.coverage.report]
+skip_covered = true
+skip_empty = true
+
+[tool.pytest.ini_options]
+# Use recommended import mode
+addopts = [
+    "--import-mode=importlib",
+]
+
+# Make it so you don't have to prefix every file with `test_`
+python_files = "*.py"
+testpaths = [
+    "tests",
+]
+
