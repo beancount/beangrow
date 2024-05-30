@@ -87,7 +87,7 @@ def main():
                                       prices.build_price_map(entries),
                                       end_date,
                                       output_reports,
-                                      args.parallel, args.pdf)
+                                      parallel=args.parallel, pdf=args.pdf)
 
     # Generate price reports.
     output_prices = path.join(args.output, "prices")
