@@ -134,6 +134,8 @@ def compute_returns_table(
     target_currency: Currency,
     account_data: List[AccountData],
     intervals: List[Interval],
+    *,
+    dietz: bool = False,
 ) -> Table:
     """Compute a table of sequential returns."""
     header = ["Return"]
@@ -143,7 +145,9 @@ def compute_returns_table(
         cash_flows = returnslib.truncate_and_merge_cash_flows(
             pricer, account_data, date1, date2
         )
-        returns = returnslib.compute_returns(cash_flows, pricer, target_currency, date2)
+        returns = returnslib.compute_returns(
+            cash_flows, pricer, target_currency, date2, dietz=dietz
+        )
         rows[0].append(returns.total)
         rows[1].append(returns.exdiv)
         rows[2].append(returns.div)
@@ -225,6 +229,10 @@ def write_returns_html(  # noqa: PLR0913
             cash_flows, pricer, target_currency, end_date
         )
 
+        returns_dietz = returnslib.compute_returns(
+            cash_flows, pricer, target_currency, end_date, dietz=True
+        )
+
         transactions = data.sorted(
             [txn for ad in account_data for txn in ad.transactions]
         )
@@ -241,7 +249,9 @@ def write_returns_html(  # noqa: PLR0913
         fprint('<img src={} style="width: 100%"/>'.format(plots["flows"]))
         fprint('<img src={} style="width: 100%"/>'.format(plots["cumvalue"]))
 
-        fprint("<h2>Returns</h2>")
+        fprint("<h2>Total returns</h2>")
+
+        fprint("<h3>Internal Rate of Return (IRR)</h3>")
         fprint(
             render_table(
                 Table(
@@ -252,14 +262,51 @@ def write_returns_html(  # noqa: PLR0913
             )
         )
 
+        fprint("<h3>Modified Dietz return (MDRR)</h3>")
+        fprint(
+            render_table(
+                Table(
+                    ["Total", "Ex-Div", "Div"],
+                    [[returns_dietz.total, returns_dietz.exdiv, returns_dietz.div]],
+                ),
+                floatfmt="{:.2%}",
+            )
+        )
+
+        fprint("<h2>Annualized returns</h2>")
+
+        fprint("<h3>Internal Rate of Return (IRR)</h3>")
         # Compute table of returns over intervals.
         table = compute_returns_table(
             pricer, target_currency, account_data, get_calendar_intervals(TODAY)
         )
         fprint("<p>", render_table(table, floatfmt="{:.1%}", classes=["full"]), "</p>")
 
+        fprint("<h3>Modified Dietz return (MDRR)</h3>")
+        table = compute_returns_table(
+            pricer,
+            target_currency,
+            account_data,
+            get_calendar_intervals(TODAY),
+            dietz=True,
+        )
+        fprint("<p>", render_table(table, floatfmt="{:.1%}", classes=["full"]), "</p>")
+
+        fprint("<h2>Cumulative returns</h2>")
+
+        fprint("<h3>Internal Rate of Return (IRR)</h3>")
         table = compute_returns_table(
             pricer, target_currency, account_data, get_cumulative_intervals(TODAY)
+        )
+        fprint("<p>", render_table(table, floatfmt="{:.1%}", classes=["full"]), "</p>")
+
+        fprint("<h3>Modified Dietz return (MDRR)</h3>")
+        table = compute_returns_table(
+            pricer,
+            target_currency,
+            account_data,
+            get_cumulative_intervals(TODAY),
+            dietz=True,
         )
         fprint("<p>", render_table(table, floatfmt="{:.1%}", classes=["full"]), "</p>")
 
