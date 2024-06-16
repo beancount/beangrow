@@ -4,16 +4,29 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "beangrow"
-version = "0.1.0"
-description = "A StreamLit app for Beancount metrics"
+version = '1.0.1'
+description = 'Returns calculations on portfolios in Beancount Resources'
 authors = [
-    "Martin Blais <blais@furius.ca>",
+    { name = 'Martin Blais', email = 'blais@furius.ca' },
+]
+maintainers = [
+    { name = 'Martin Blais', email = 'blais@furius.ca' },
 ]
 readme = "README.md"
+keywords = [
+    'accounting', 'ledger', 'beancount', 'returns', 'investments'
+]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "License :: OSI Approved :: Apache Software License",
-    "Typing :: Typed",
+    'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: SQL',
+    'Topic :: Office/Business :: Financial :: Accounting',
 ]
 packages = [
     { include = "beangrow", from = "." },
