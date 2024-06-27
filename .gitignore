@@ -1,3 +1,14 @@
-build
-__pycache__
-*.egg-info
+# Python artifacts
+/.coverage
+/.pycache
+/.pytest_cache
+/.venv
+/dist
+/build
+/*.egg-info
+
+# Direnv cache
+/.direnv
+
+# Nix artifacts
+/result

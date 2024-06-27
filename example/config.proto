@@ -1,0 +1,106 @@
+investments {
+  investment {
+    currency: "GLD"
+    asset_account: "Assets:US:ETrade:GLD"
+    dividend_accounts: "Income:US:ETrade:GLD:Dividend"
+    cash_accounts: "Assets:US:ETrade:Cash"
+  }
+  investment {
+    currency: "ITOT"
+    asset_account: "Assets:US:ETrade:ITOT"
+    dividend_accounts: "Income:US:ETrade:ITOT:Dividend"
+    cash_accounts: "Assets:US:ETrade:Cash"
+  }
+  investment {
+    currency: "VEA"
+    asset_account: "Assets:US:ETrade:VEA"
+    dividend_accounts: "Income:US:ETrade:VEA:Dividend"
+    cash_accounts: "Assets:US:ETrade:Cash"
+  }
+  investment {
+    currency: "VHT"
+    asset_account: "Assets:US:ETrade:VHT"
+    dividend_accounts: "Income:US:ETrade:VHT:Dividend"
+    cash_accounts: "Assets:US:ETrade:Cash"
+  }
+  investment {
+    currency: "CORP"
+    asset_account: "Assets:US:ETrade:CORP"
+    dividend_accounts: "Income:US:ETrade:CORP:Dividend"
+    cash_accounts: "Assets:US:ETrade:Cash"
+  }
+  investment {
+    currency: "CORPEUR"
+    asset_account: "Assets:US:ETrade:CORPEUR"
+    cash_accounts: "Assets:US:ETrade:CashEUR"
+  }
+  investment {
+    currency: "CORPSPL"
+    asset_account: "Assets:US:ETrade:CORPSPL"
+    cash_accounts: "Assets:US:ETrade:Cash"
+  }
+  investment {
+    currency: "RGAGX"
+    asset_account: "Assets:US:Vanguard:RGAGX"
+    cash_accounts: "Assets:US:Vanguard:Cash"
+  }
+  investment {
+    currency: "VBMPX"
+    asset_account: "Assets:US:Vanguard:VBMPX"
+    cash_accounts: "Assets:US:Vanguard:Cash"
+  }
+}
+groups {
+  group {
+    name: "Gold"
+    investment: "Assets:US:ETrade:GLD"
+  }
+  group {
+    name: "iShares Core S&P Total U.S. Stock Market ETF"
+    investment: "Assets:US:ETrade:ITOT"
+  }
+  group {
+    name: "American Funds Growth Fund of America"
+    investment: "Assets:US:Vanguard:RGAGX"
+  }
+  group {
+    name: "Vanguard Total Bond Market Index Fund Institutional Plus Shares"
+    investment: "Assets:US:Vanguard:VBMPX"
+  }
+  group {
+    name: "Vanguard FTSE Developed Markets ETF"
+    investment: "Assets:US:ETrade:VEA"
+  }
+  group {
+    name: "Vanguard Health Care ETF"
+    investment: "Assets:US:ETrade:VHT"
+  }
+  group {
+    name: "CORP"
+    investment: "Assets:US:ETrade:CORP"
+  }
+  group {
+    name: "CORP (converted to EUR)"
+    investment: "Assets:US:ETrade:CORP"
+    currency: "EUR"
+  }
+  group {
+    name: "CORPEUR"
+    investment: "Assets:US:ETrade:CORPEUR"
+  }
+  group {
+    name: "CORPSPL"
+    investment: "Assets:US:ETrade:CORPSPL"
+  }
+  group {
+    name: "CORP (all)"
+    investment: "Assets:US:ETrade:CORP"
+    investment: "Assets:US:ETrade:CORPEUR"
+    currency: "USD"
+  }
+  group {
+    name: "All investments"
+    investment: "Assets:*"
+    currency: "USD"
+  }
+}
