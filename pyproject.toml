@@ -25,7 +25,7 @@ beangrow-prices = "beangrow.download_prices:main"
 beangrow-prices-file = "beangrow.download_prices_from_file:main"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<=3.12"
+python = ">=3.10"
 numpy = "^1.26.4"
 pandas = "^2.2.2"
 matplotlib = "^3.9.0"
