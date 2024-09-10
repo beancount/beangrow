@@ -188,6 +188,12 @@ def produce_cash_flows_general(entry: data.Directive,
             posting.meta["flow"] = cf
             flows.append(cf)
 
+        elif category == Cat.ASSET and has_dividend:
+            cf = CashFlow(entry.date, convert.get_weight(posting), has_dividend,
+                          "dividend", account)
+            posting.meta["flow"] = cf
+            flows.append(cf)
+
     return flows
 
 
