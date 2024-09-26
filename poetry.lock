@@ -75,7 +75,7 @@ requests = "*"
 
 [package.source]
 type = "git"
-url = "git@github.com:beancount/beanprice.git"
+url = "git+https://github.com/beancount/beanprice.git"
 reference = "HEAD"
 resolved_reference = "41576e2ac889e4825e4985b6f6c56aa71de28304"
 
