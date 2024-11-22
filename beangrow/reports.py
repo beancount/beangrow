@@ -135,10 +135,11 @@ def compute_returns_table(
     account_data: List[AccountData],
     intervals: List[Interval],
     *,
+    header_text: str = "Return",
     dietz: bool = False,
 ) -> Table:
     """Compute a table of sequential returns."""
-    header = ["Return"]
+    header = [header_text]
     rows: List[list[str | float]] = [["Total"], ["Ex-div"], ["Div"]]
     for intname, date1, date2 in intervals:
         header.append(intname)
@@ -556,16 +557,16 @@ def get_calendar_intervals(date: Date) -> List[Interval]:
 def get_cumulative_intervals(date: Date) -> List[Interval]:
     """Return a list of date pairs for sequential intervals."""
     return [
-        ("15_years_ago", Date(date.year - 15, 1, 1), date),
-        ("10_years_ago", Date(date.year - 10, 1, 1), date),
-        ("5_years_ago", Date(date.year - 5, 1, 1), date),
-        ("4_years_ago", Date(date.year - 4, 1, 1), date),
-        ("3_years_ago", Date(date.year - 3, 1, 1), date),
-        ("2_years_ago", Date(date.year - 2, 1, 1), date),
-        ("1_year_ago", Date(date.year - 1, 1, 1), date),
-        ("ytd", Date(date.year, 1, 1), date),
-        ("rolling_6_months_ago", date - relativedelta(months=6), date),
-        ("rolling_3_months_ago", date - relativedelta(months=3), date),
+        ("15 years ago", Date(date.year - 15, 1, 1), date),
+        ("10 years ago", Date(date.year - 10, 1, 1), date),
+        ("5 years ago", Date(date.year - 5, 1, 1), date),
+        ("4 years ago", Date(date.year - 4, 1, 1), date),
+        ("3 years ago", Date(date.year - 3, 1, 1), date),
+        ("2 years ago", Date(date.year - 2, 1, 1), date),
+        ("1 year ago", Date(date.year - 1, 1, 1), date),
+        ("YTD", Date(date.year, 1, 1), date),
+        ("rolling 6 months ago", date - relativedelta(months=6), date),
+        ("rolling 3 months ago", date - relativedelta(months=3), date),
     ]
 
 
