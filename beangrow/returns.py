@@ -115,7 +115,7 @@ def compute_dietz(
     start_date: None | Date = None
     days_in_period: int = 1
 
-    logging.info("Inside Dietz. From %s to %s", start_date, end_date)
+    logging.debug("Inside Dietz. From %s to %s", start_date, end_date)
 
     # Array of cash flows, converted to target currency.
     usd_flows = []
@@ -134,7 +134,7 @@ def compute_dietz(
             val -= float(flow.amount.number)  # type: ignore[]
         else:
             if start_date is None:
-                logging.info("Setting start date to %s", flow.date)
+                logging.debug("Setting start date to %s", flow.date)
                 start_date = flow.date
                 days_in_period = (end_date - start_date).days
 
@@ -163,16 +163,16 @@ def compute_dietz(
     pnl = end_value + start_value - np.sum(cash_flows)
     average_capital = -start_value + weight_sum
     dietz = pnl / average_capital
-    logging.info("Start date: %s", start_date)
-    logging.info("End date: %s", end_date)
+    logging.debug("Start date: %s", start_date)
+    logging.debug("End date: %s", end_date)
 
-    logging.info(
+    logging.debug(
         "PnL: %s + %s - %s = %s", end_value, start_value, np.sum(cash_flows), pnl
     )
-    logging.info(
+    logging.debug(
         "Average capital: %s + %s = %s", -start_value, weight_sum, average_capital
     )
-    logging.info("Dietz return: %s", dietz)
+    logging.debug("Dietz return: %s", dietz)
 
     return dietz
 
