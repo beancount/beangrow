@@ -31,7 +31,7 @@ pandas = "^2.2.2"
 matplotlib = "^3.9.0"
 beancount = "^2.3.6"
 scipy = "^1.13.1"
-beanprice = {git = "git+https://github.com/beancount/beanprice.git"}
+beanprice = "^1.2.1"
 pandas-stubs = "^2.2.2.240514"
 matplotlib-stubs = "^0.2.0"
 
