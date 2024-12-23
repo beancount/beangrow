@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 """Calculate my true returns, including dividends and real costs.
 """
 
