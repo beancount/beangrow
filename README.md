@@ -22,3 +22,13 @@ There are three related scripts:
   side-product. This script can read that file and fetch those missing dates,
   which you can insert in your ledger and then rerun compute_returns.py for a
   more precise calculation.
+
+## Example
+
+To run the example:
+```
+cd example
+uv run beangrow-returns ledger.beancount config.pbtxt ./reports
+```
+
+The reports are available at `example/reports/groups`.
