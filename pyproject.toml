@@ -7,10 +7,10 @@ name = "beangrow"
 version = '1.0.1'
 description = 'Returns calculations on portfolios in Beancount Resources'
 authors = [
-    "Martin Blais <blais@furius.ca>",
+    { name = 'Martin Blais', email = 'blais@furius.ca' },
 ]
 maintainers = [
-    "Martin Blais <blais@furius.ca>",
+    { name = 'Martin Blais', email = 'blais@furius.ca' },
 ]
 readme = "README.md"
 keywords = [
@@ -38,6 +38,9 @@ dependencies = [
     'matplotlib-stubs >= 0.2.0',
     "protobuf >= 5.29.3",
 ]
+
+[tool.setuptools]
+license-files = []
 
 [project.scripts]
 beangrow-returns = "beangrow.compute_returns:main"
