@@ -34,9 +34,17 @@ dependencies = [
     'beancount >= 2.3.6',
     'scipy >= 1.13.1',
     'beanprice >= 1.2.1',
+    'protobuf >= 5.29.3',
+]
+
+[dependency-groups]
+dev = [
+    'ruff >= 0.9.3',
     'pandas-stubs >= 2.2.2.240514',
     'matplotlib-stubs >= 0.2.0',
-    "protobuf >= 5.29.3",
+    'mypy>=1.14.1',
+    'types-protobuf>=5.29.1.20241207',
+    'types-python-dateutil>=2.9.0.20241206',
 ]
 
 [tool.setuptools]
