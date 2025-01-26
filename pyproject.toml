@@ -7,10 +7,10 @@ name = "beangrow"
 version = '1.0.1'
 description = 'Returns calculations on portfolios in Beancount Resources'
 authors = [
-    { name = 'Martin Blais', email = 'blais@furius.ca' },
+    "Martin Blais <blais@furius.ca>",
 ]
 maintainers = [
-    { name = 'Martin Blais', email = 'blais@furius.ca' },
+    "Martin Blais <blais@furius.ca>",
 ]
 readme = "README.md"
 keywords = [
