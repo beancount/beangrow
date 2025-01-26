@@ -1,8 +1,8 @@
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
 
-[tool.poetry]
+[project]
 name = "beangrow"
 version = '1.0.1'
 description = 'Returns calculations on portfolios in Beancount Resources'
@@ -26,25 +26,23 @@ classifiers = [
     'Programming Language :: SQL',
     'Topic :: Office/Business :: Financial :: Accounting',
 ]
-packages = [
-    { include = "beangrow", from = "." },
+requires-python = '>= 3.10'
+dependencies = [
+    'numpy >= 1.26.4',
+    'pandas >= 2.2.2',
+    'matplotlib >= 3.9.0',
+    'beancount >= 2.3.6',
+    'scipy >= 1.13.1',
+    'beanprice >= 1.2.1',
+    'pandas-stubs >= 2.2.2.240514',
+    'matplotlib-stubs >= 0.2.0',
+    "protobuf >= 5.29.3",
 ]
 
-[tool.poetry.scripts]
+[project.scripts]
 beangrow-returns = "beangrow.compute_returns:main"
 beangrow-prices = "beangrow.download_prices:main"
 beangrow-prices-file = "beangrow.download_prices_from_file:main"
-
-[tool.poetry.dependencies]
-python = ">=3.10"
-numpy = "^1.26.4"
-pandas = "^2.2.2"
-matplotlib = "^3.9.0"
-beancount = "^2.3.6"
-scipy = "^1.13.1"
-beanprice = "^1.2.1"
-pandas-stubs = "^2.2.2.240514"
-matplotlib-stubs = "^0.2.0"
 
 [tool.black]
 line-length = 88
