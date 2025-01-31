@@ -203,7 +203,7 @@ def compute_irr(
     irr, *_ = fsolve(
         net_present_value, x0=estimated_irr, args=(cash_flows, years), full_output=True
     )
-    return irr.item()
+    return np.maximum(irr.item(), -1)
 
 
 class Returns(typing.NamedTuple):
