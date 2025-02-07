@@ -45,6 +45,7 @@ dev = [
     'mypy>=1.14.1',
     'types-protobuf>=5.29.1.20241207',
     'types-python-dateutil>=2.9.0.20241206',
+    "pytest>=8.3.4",
 ]
 
 [tool.setuptools]
@@ -135,15 +136,3 @@ ignore = [
 [tool.coverage.report]
 skip_covered = true
 skip_empty = true
-
-[tool.pytest.ini_options]
-# Use recommended import mode
-addopts = [
-    "--import-mode=importlib",
-]
-
-# Make it so you don't have to prefix every file with `test_`
-python_files = "*.py"
-testpaths = [
-    "tests",
-]

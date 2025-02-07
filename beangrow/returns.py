@@ -27,6 +27,7 @@ Currency = str
 Date = datetime.date
 Array = np.ndarray
 
+ONE_DAY = datetime.timedelta(days=1)
 
 class Pricer:
     """A price database that remembers the queried prices and dates."""
@@ -295,7 +296,7 @@ def truncate_cash_flows( # noqa: C901
         # caching it on every single transaction.
         balance = compute_balance_at(account_data.transactions, date_end)
         if not balance.is_empty():
-            cost_balance = balance.reduce(pricer.get_value, date_end)
+            cost_balance = balance.reduce(pricer.get_value, date_end - ONE_DAY)
             cost_position = cost_balance.get_only_position()
             if cost_position:
                 end_flows.append(
