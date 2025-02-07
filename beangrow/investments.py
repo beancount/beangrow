@@ -433,7 +433,7 @@ def prune_entries(entries: data.Entries, config: Config) -> data.Entries:
 
 def compute_balance_at(transactions: data.Entries,
                        date: Optional[Date] = None) -> Inventory:
-    """Compute the balance at a specific date."""
+    """Compute the balance before a specific date."""
     balance = Inventory()
     for entry in transactions:
         if date is not None and entry.date >= date:

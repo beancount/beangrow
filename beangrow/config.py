@@ -32,16 +32,15 @@ def expand_globs(patterns: List[str], valid_set: List[str]) -> List[str]:
     return out_values
 
 
-def read_config(config_filename: str,
+def read_config_from_string(config_string: str,
                 filter_reports: List[str],
                 accounts: List[Account]) -> Config:
     """Read the configuration, perform globbing expansions, and whittle down the
     list of reports and investments to the requested minimal."""
 
-    # Read the file.
+    # Read the config from a string.
     config = Config()
-    with open(config_filename, "r") as infile:
-        text_format.Merge(infile.read(), config)
+    text_format.Merge(config_string, config)
     reports = list(config.groups.group)
 
     # Expand account names.
@@ -78,3 +77,13 @@ def read_config(config_filename: str,
     config.investments.investment.extend(investments)
 
     return config
+
+
+def read_config(config_filename: str,
+                filter_reports: List[str],
+                accounts: List[Account]) -> Config:
+    # Read the file.
+    with open(config_filename, "r") as infile:
+        config_string = infile.read()
+
+    return read_config_from_string(config_string, filter_reports, accounts)
