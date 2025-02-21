@@ -74,9 +74,10 @@ plugin "beancount.plugins.implicit_prices"
 class ReturnsTest(unittest.TestCase):
     def test_truncate_cash_flows(self):
         pricer, account_data_map = load(TEST_LEDGER, TEST_CONFIG)
+        account_data = account_data_map["Assets:CORP"]
 
         cash_flows = truncate_cash_flows(
-            pricer, account_data_map["Assets:CORP"], datetime.date(2020, 12, 30), datetime.date(2021, 1, 1)
+            pricer, account_data, datetime.date(2020, 12, 30), datetime.date(2021, 1, 1)
         )
         assert cash_flows == [
             # truncate flows before 2020-12-30
@@ -88,6 +89,7 @@ class ReturnsTest(unittest.TestCase):
                 is_dividend=False,
                 source="open",
                 account="Assets:CORP",
+                transaction=None,
             ),
             CashFlow(
                 date=datetime.date(2020, 12, 30),
@@ -95,6 +97,7 @@ class ReturnsTest(unittest.TestCase):
                 is_dividend=False,
                 source="cash",
                 account="Assets:CORP",
+                transaction=account_data.transactions[2],
             ),
             CashFlow(
                 date=datetime.date(2020, 12, 31),
@@ -102,6 +105,7 @@ class ReturnsTest(unittest.TestCase):
                 is_dividend=False,
                 source="cash",
                 account="Assets:CORP",
+                transaction=account_data.transactions[3],
             ),
             # balance before 2021-01-01: 4 CORP
             # price on 2020-12-31: 104 USD
@@ -111,6 +115,7 @@ class ReturnsTest(unittest.TestCase):
                 is_dividend=False,
                 source="close",
                 account="Assets:CORP",
+                transaction=None,
             ),
         ]
 
