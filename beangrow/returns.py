@@ -287,6 +287,7 @@ def truncate_cash_flows( # noqa: C901
                         False,  # noqa: FBT003
                         "open",
                         account_data.account,
+                        None
                     )
                 )
 
@@ -306,6 +307,7 @@ def truncate_cash_flows( # noqa: C901
                         False,  # noqa: FBT003
                         "close",
                         account_data.account,
+                        None
                     )
                 )
 

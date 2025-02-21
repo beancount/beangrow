@@ -85,6 +85,7 @@ CashFlow = typing.NamedTuple("CashFlow", [
     ("is_dividend", bool),  # True if the flow is a dividend.
     ("source", str),        # Source of this cash flow.
     ("account", Account),   # Asset account for which this was generated.
+    ("transaction", Optional[data.Transaction])  # Source transaction of this cash flow.
 ])
 
 
@@ -177,14 +178,14 @@ def produce_cash_flows_general(entry: data.Directive,
         if category == Cat.CASH:
             assert not posting.cost
             cf = CashFlow(entry.date, convert.get_weight(posting), has_dividend,
-                          "cash", account)
+                          "cash", account, entry)
             posting.meta["flow"] = cf
             flows.append(cf)
 
         elif category == Cat.OTHERASSET:
             # If the account deposits other assets, count this as an outflow.
             cf = CashFlow(entry.date, convert.get_weight(posting), False,
-                          "other", account)
+                          "other", account, entry)
             posting.meta["flow"] = cf
             flows.append(cf)
 
@@ -301,7 +302,7 @@ def _handle_cash(entry: data.Directive, account: Account,
     for posting in entry.postings:
         if posting.meta["category"] == Cat.CASH:
             assert not posting.cost
-            cf = CashFlow(entry.date, posting.units, is_dividend, "cash", account)
+            cf = CashFlow(entry.date, posting.units, is_dividend, "cash", account, entry)
             posting.meta["flow"] = cf
             flows.append(cf)
     return flows
@@ -315,7 +316,7 @@ def handle_stock_exchange(entry: data.Directive, account: Account) -> List[CashF
     for posting in entry.postings:
         if posting.meta["category"] == Cat.OTHERASSET:
             cf = CashFlow(entry.date, convert.get_weight(posting), False,
-                          "other", account)
+                          "other", account, entry)
             posting.meta["flow"] = cf
             flows.append(cf)
     return flows
@@ -484,15 +485,21 @@ def write_account_file(dcontext: display_context.DisplayContext,
 
 def cash_flows_to_table(cash_flows: List[CashFlow]) -> pandas.DataFrame:
     """Flatten a list of cash flows to an HTML table string."""
-    header = ["date", "amount", "currency", "is_dividend", "source", "investment"]
+    header = ["date", "amount", "currency", "is_dividend", "source", "investment", "transaction"]
     rows = []
     for flow in cash_flows:
+        transaction_str = (
+            f"{flow.transaction.payee or ''} {flow.transaction.narration or ''}".strip()
+            if flow.transaction
+            else ""
+        )
         rows.append((flow.date,
                      float(flow.amount.number),
                      flow.amount.currency,
                      flow.is_dividend,
                      flow.source,
-                     flow.account))
+                     flow.account,
+                     transaction_str))
     return pandas.DataFrame(columns=header, data=rows)
 
 
