@@ -167,7 +167,7 @@ def main():
     config = infer_configuration(entries, options_map, args.start_date)
 
     logging.info("Done.")
-    outfile = open(args.config) if args.config else sys.stdout
+    outfile = open(args.config, "w") if args.config else sys.stdout
     print(config, file=outfile)
 
 
