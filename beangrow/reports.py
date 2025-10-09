@@ -194,7 +194,7 @@ def write_returns_html(  # noqa: PLR0913
 
     logging.info("Writing returns dir for %s: %s", title, dirname)
     Path(dirname).mkdir(parents=True, exist_ok=True)
-    with Path(Path(dirname) / "index.html").open("w") as indexfile:
+    with Path(Path(dirname) / "index.html").open("w", encoding="utf8") as indexfile:
         fprint = partial(print, file=indexfile)
         fprint(RETURNS_TEMPLATE_PRE.format(style=STYLE, title=title))
 
@@ -338,7 +338,7 @@ def write_returns_debugfile(
     logging.info("Writing returns dir for %s: %s", title, filename)
     Path(filename).parent.mkdir(parents=True, exist_ok=True)
 
-    with Path(filename).open("w") as indexfile:
+    with Path(filename).open("w", encoding="utf8") as indexfile:
         fprint = partial(print, file=indexfile)
         fprint(f"* {title}")
         fprint("** Cash Flows")
@@ -540,7 +540,7 @@ def write_price_directives(
         price_entries.append(price)
 
     Path(filename).parent.mkdir(parents=True, exist_ok=True)
-    with Path(filename).open("w") as prfile:
+    with Path(filename).open("w", encoding="utf8") as prfile:
         printer.print_entries(price_entries, file=prfile)
 
 
