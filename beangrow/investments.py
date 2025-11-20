@@ -486,7 +486,7 @@ def write_account_file(dcontext: display_context.DisplayContext,
     logging.info("Writing details file: %s", filename)
     epr = printer.EntryPrinter(dcontext=dcontext, stringify_invalid_types=True)
     os.makedirs(path.dirname(filename), exist_ok=True)
-    with open(filename, "w") as outfile:
+    with open(filename, "w", encoding="utf8") as outfile:
         fprint = partial(print, file=outfile)
         fprint(";; -*- mode: beancount; coding: utf-8; fill-column: 400 -*-")
 
@@ -553,7 +553,7 @@ def write_transactions_by_type(output_signatures: str,
         sigentries = data.sorted(sigentries)
 
         filename = "{}.org".format(sig)
-        with open(path.join(output_signatures, filename), "w") as catfile:
+        with open(path.join(output_signatures, filename), "w", encoding="utf8") as catfile:
             fprint = partial(print, file=catfile)
             fprint(";; -*- mode: beancount; coding: utf-8; fill-column: 400 -*-")
 

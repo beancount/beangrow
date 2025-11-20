@@ -73,7 +73,7 @@ def main():
     # Load, filter and expand the configuration.
     config = configlib.read_config(args.config, args.filter_reports, accounts)
     os.makedirs(args.output, exist_ok=True)
-    with open(path.join(args.output, "config.pbtxt"), "w") as efile:
+    with open(path.join(args.output, "config.pbtxt"), "w", encoding="utf8") as efile:
         print(config, file=efile)
 
     # Extract data from the ledger.

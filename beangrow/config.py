@@ -83,7 +83,7 @@ def read_config(config_filename: str,
                 filter_reports: List[str],
                 accounts: List[Account]) -> Config:
     # Read the file.
-    with open(config_filename, "r") as infile:
+    with open(config_filename, "r", encoding="utf8") as infile:
         config_string = infile.read()
 
     return read_config_from_string(config_string, filter_reports, accounts)
